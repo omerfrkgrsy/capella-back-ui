@@ -1,9 +1,19 @@
-import Api from './api'
+import axiosInstance from '../middlewares/jwtInterceptor';
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-    async loginUser(user){
-        var response = await Api().post('login',{...user});
-        return response;
-    }
-}
+const loginUser = async (user) =>{
+    var {data} = await axiosInstance.post('api/login',{...user});
+    return data;
+};
+
+const getCategory = async (id) =>{
+    var {data} = await axiosInstance.get('category/'+id);
+    return data;
+};
+
+const exportFunction = {
+    loginUser,
+    getCategory
+};
+
+
+export default exportFunction;

@@ -1,28 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit'
-import tokenService from '../../services/tokenService';
-import { fetchCategory } from '../actions/authActions';
 
 const initialState = {
-  user: {},
-  token:null,
-  isAuthenticated:tokenService.getToken()?true:false,
-  category:{}
+  loading:false,
+  
 }
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: 'midleware',
   initialState,
   reducers: {
     setUser: (state,action) => {
       state.user.value = action.payload;
     },
+    
     setToken: (state,action) => {
+      console.log(state)
       state.token = action.payload;
     },
     setIsAuthenticated: (state,action) => {
       state.isAuthenticated = action.payload;
-    },
-  }
+    }
+  },
 })
 
 export default authSlice;
