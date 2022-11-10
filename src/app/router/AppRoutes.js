@@ -1,22 +1,25 @@
 import { lazy } from "react";
+import Dashboard from "../views/pages/Dashboard";
+import Login from "../views/pages/Login";
+import UserManagement from "../views/pages/UserManagement";
 
 const AppRoutes = [
   {
     path: "login",
-    component: lazy(() => import("../views/pages/Login")),
+    component: <Login/>,
     exact: true,
     guard: false,
   },
   {
     path: "",
-    component: lazy(() => import("../views/pages/Dashboard")),
+    component: <Dashboard/>,
     exact: true,
     guard: true,
   },
 
   {
     path: "user-management",
-    component: lazy(() => import("../views/pages/UserManagement")),
+    component: <UserManagement/>,
     exact: true,
     guard: true,
   },

@@ -5,7 +5,7 @@ import { fetchCategory } from '../actions/authActions';
 const initialState = {
   user: {},
   token:null,
-  isAuthenticated:tokenService.getToken()?true:false,
+  isAuthenticated:false,
   category:{}
 }
 

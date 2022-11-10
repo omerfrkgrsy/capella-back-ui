@@ -2,12 +2,41 @@ import { Routes, Route } from "react-router-dom";
 import routes from "./AppRoutes"; // Route list
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
-import { React, Suspense } from "react";
+import { React } from "react";
+import Navbar from "../views/Navbar/Navbar";
 /* import Loader from 'sharedComponent/Loader'; */
 
 const AppRoutes = ({ isAuthenticated }) => (
   <Routes>
-    <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+    <Route path='/*' element={<Navbar/>}>
+    <Route path="" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+      {routes
+        .filter((x) => x.guard === true)
+        .map(({ component, path, exact }) => (
+          
+            <Route
+              path={`${path}`}
+              element={component}
+              key={path}
+              exact={exact}
+            ></Route>
+        ))}
+    </Route>
+    <Route path="" element={<PublicRoute isAuthenticated={isAuthenticated} />}>
+      {routes
+        .filter((x) => x.guard === false)
+        .map(({ component, path, exact }) => (
+          
+            <Route
+              path={`${path}`}
+              element={component}
+              key={path}
+              exact={exact}
+            ></Route>
+        ))}
+    </Route>
+    </Route>
+    {/*  <Route path="" element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
       {routes
         .filter((x) => x.guard === true)
         .map(({ component: Component, path, exact }) => (
@@ -32,7 +61,7 @@ const AppRoutes = ({ isAuthenticated }) => (
               exact={exact}
             ></Route>
         ))}
-    </Route>
+    </Route> */ }
   </Routes>
 );
 
